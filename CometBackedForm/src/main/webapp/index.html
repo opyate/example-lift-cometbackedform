@@ -1,0 +1,21 @@
+<lift:surround with="default" at="content">
+    <h2>Comet-backed form demo</h2>
+    <p>
+    <lift:helloWorld.howdy>
+        <span>Welcome to your Lift app at <b:time/></span>
+    </lift:helloWorld.howdy>
+    </p>
+
+    <!-- comet stuff starts here: -->
+
+    <lift:AlphaForm.ajaxRender>
+        <p>Alpha: <f:a/> (magic value is "magic")</p>
+    </lift:AlphaForm.ajaxRender>
+
+    <lift:comet type="BetaCometActor"/>
+
+    <lift:comet type="DeltaCometActor"/>
+
+
+</lift:surround>
+
