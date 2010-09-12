@@ -14,12 +14,6 @@ import code.comet.{FormUpdate, FormStateSessionVar}
 import net.liftweb.common.{Full, Loggable}
 import code.lib.{LongRunningWorker, NewJob}
 
-/**
- * TODO Javadoc here...
- *
- * @author juanuys
- */
-
 class AlphaForm extends Loggable {
 
   private[this] def doOnSubmit(a: String): JsCmd = {

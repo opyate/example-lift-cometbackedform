@@ -1,1 +1,14 @@
 Illustrating how to build a form in Lift based purely by CometActors, where certain form elements have long-running validation.
+
+In your shell, run with:
+
+bc. $ sbt
+
+Then type:
+
+bc. update
+jetty-run
+
+Navigate to:
+
+"http://localhost:8080":http://localhost:8080

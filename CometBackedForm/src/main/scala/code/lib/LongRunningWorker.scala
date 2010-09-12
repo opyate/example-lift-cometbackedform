@@ -18,7 +18,7 @@ object LongRunningWorker extends LiftActor with ListenerManager with Loggable {
 
   override def lowPriority = {
     case GetJobStatus(jobName) => {
-      jobs(jobName)
+      jobs.get(jobName)
     }
     case _ => {
       logger.warn("Worker received unidentified message.")
