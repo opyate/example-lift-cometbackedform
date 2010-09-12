@@ -63,7 +63,7 @@ class DeltaCometActor extends CometActor with Loggable {
     <p>Waiting... (If Alpha is "magic", I'll be happy. I don't care about Beta)</p>
 
   /**
-   * TODO figure out a way for the Comet actor to poll periodically... instead of waiting to be contacted.
+   *  TODO figure out a way for the Comet actor to poll periodically... instead of waiting to be contacted.
    */
   override def lowPriority = {
     case FormUpdate => {
@@ -78,10 +78,23 @@ class DeltaCometActor extends CometActor with Loggable {
             case JobStatusSuccess | JobStatusFailure => {
               // finally, a result. Render!!!
               logger.info("Rendering Delta")
-              partialUpdate(
-                JqSetHtml(uniqueId, <span>Render DeltaForm, state is now: {FormStateSessionVar.is.toString}</span>) &
-                Hide(uniqueId) & FadeIn(uniqueId, TimeSpan(0),TimeSpan(500))
-              )
+              FormStateSessionVar.is.a match {
+                case Full("magic") => {
+                  partialUpdate(
+                    JqSetHtml(uniqueId, <span>Render magic DeltaForm, state is now: {FormStateSessionVar.is.toString}</span>) &
+                    Hide(uniqueId) & FadeIn(uniqueId, TimeSpan(0),TimeSpan(500))
+                  )
+                }
+                case Full(s) => {
+                  partialUpdate(
+                    JqSetHtml(uniqueId, <span>Render normal DeltaForm, state is now: {FormStateSessionVar.is.toString}</span>) &
+                    Hide(uniqueId) & FadeIn(uniqueId, TimeSpan(0),TimeSpan(500))
+                  )
+                }
+                case _ => {
+                  logger.error("Eek! A job without a name made it into the job queue!")
+                }
+              }
             }
           }
         }
